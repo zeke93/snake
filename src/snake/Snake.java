@@ -1,9 +1,10 @@
 package snake;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 public class Snake extends JFrame {
 	private static final int rows = 60;
 	private static final int columns = 80;
-	
+
 	// 方向
 	private static final int UP = 1;
 	private static final int RIGHT = 2;
@@ -45,6 +46,10 @@ public class Snake extends JFrame {
 		this.setBounds(80, 80, 400, 400);
 		this.setVisible(true);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		KeyboardFocusManager manager = KeyboardFocusManager
+				.getCurrentKeyboardFocusManager();
+		manager.addKeyEventPostProcessor((KeyEventPostProcessor) this
+				.getMyKeyEventHandler());
 	}
 
 	public void init() {
@@ -63,5 +68,29 @@ public class Snake extends JFrame {
 			}
 		}
 		getContentPane().add(p, BorderLayout.CENTER);
+
+	}
+
+	public KeyEventPostProcessor getMyKeyEventHandler() {
+		return new KeyEventPostProcessor()// 返回一个实现KeyEventPostProcessor接口的匿名内部类。
+		{
+			public boolean postProcessKeyEvent(KeyEvent e)// 实现postProcessKeyEvent方法
+			{
+				if (e.getID() != KeyEvent.KEY_PRESSED) {
+					return false;
+				}
+				int keycode = e.getKeyCode();
+				if (keycode == KeyEvent.VK_UP) {
+					System.out.println("=======up=======");
+				} else if (keycode == KeyEvent.VK_RIGHT) {
+					System.out.println("=======right=======");
+				} else if (keycode == KeyEvent.VK_DOWN) {
+					System.out.println("=======down=======");
+				} else if (keycode == KeyEvent.VK_LEFT) {
+					System.out.println("=======left=======");
+				}
+				return true;
+			}
+		};
 	}
 }
