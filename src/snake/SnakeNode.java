@@ -4,7 +4,16 @@ public class SnakeNode {
 	private int x;
 	private int y;
 	private SnakeNode next;
-	private int direction;//方向
+	private SnakeNode ahead;
+
+	public SnakeNode() {
+	}
+
+	public SnakeNode(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
 
 	public int getX() {
 		return x;
@@ -28,6 +37,14 @@ public class SnakeNode {
 
 	public void setNext(SnakeNode next) {
 		this.next = next;
+	}
+
+	public SnakeNode getAhead() {
+		return ahead;
+	}
+
+	public void setAhead(SnakeNode ahead) {
+		this.ahead = ahead;
 	}
 
 }
